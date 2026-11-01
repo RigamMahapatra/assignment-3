@@ -1,0 +1,184 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {10, 20, 30};
+    int *p = arr;
+
+    cout << *p << endl;
+
+    p++;
+
+    cout << *p << endl;
+
+    return 0;#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string name = "Rigam";
+
+    cout << "Name: " << name << endl;
+    cout << "Length: " << name.length() << endl;
+
+    return 0;
+}
+}
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+    char str[100];
+
+    cout << "Enter a string: ";
+    cin.getline(str, 100);
+
+    int len = strlen(str);
+
+    char *left = str;
+    char *right = str + len - 1;
+
+    while (left < right) {
+        char temp = *left;
+        *left = *right;
+        *right = temp;
+
+        left++;
+        right--;
+    }
+
+    cout << "Reversed string: " << str << endl;
+
+    return 0;
+}
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string str;
+    int vowels = 0, consonants = 0;
+
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    for (char ch : str) {
+        ch = tolower(static_cast<unsigned char>(ch));
+
+        if (ch >= 'a' && ch <= 'z') {
+            if (ch == 'a' || ch == 'e' ||
+                ch == 'i' || ch == 'o' ||
+                ch == 'u') {
+                vowels++;
+            } else {
+                consonants++;
+            }
+        }
+    }
+
+    cout << "Vowels: " << vowels << endl;
+    cout << "Consonants: " << consonants << endl;
+
+    return 0;
+}
+#include <iostream>
+using namespace std;
+
+void swapNumbers(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x, y;
+
+    cout << "Enter two numbers: ";
+    cin >> x >> y;
+
+    swapNumbers(&x, &y);
+
+    cout << "After swapping:" << endl;
+    cout << "x = " << x << endl;
+    cout << "y = " << y << endl;
+
+    return 0;
+}
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+    int n;
+
+    cout << "Enter array size: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Invalid array size." << endl;
+        return 0;
+    }
+
+    int *arr = static_cast<int*>(
+        malloc(static_cast<size_t>(n) * sizeof(int))
+    );
+
+    if (arr == nullptr) {
+        cout << "Memory allocation failed." << endl;
+        return 1;
+    }
+
+    cout << "Enter " << n << " elements: ";
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    cout << "Array elements: ";
+
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+
+    free(arr);
+    arr = nullptr;
+
+    return 0;
+}
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int countWords(const char *str) {
+    int words = 0;
+    bool insideWord = false;
+
+    while (*str != '\0') {
+        if (isspace(static_cast<unsigned char>(*str))) {
+            insideWord = false;
+        } else if (!insideWord) {
+            words++;
+            insideWord = true;
+        }
+
+        str++;
+    }
+
+    return words;
+}
+
+int main() {
+    char sentence[500];
+
+    cout << "Enter a sentence: ";
+    cin.getline(sentence, 500);
+
+    cout << "Number of words: "
+         << countWords(sentence) << endl;
+
+    return 0;
+}
